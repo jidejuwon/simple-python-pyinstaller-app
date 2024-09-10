@@ -10,7 +10,7 @@ pipeline {
         stage('Deploy') {
             steps{
                 withCredentials([string(credentialsId: 'DEST', variable: 'DEST')]){
-                    sh 'scp -r sources/ "${DEST}"'
+                    sh 'scp -o StrictHostKeyChecking=no -r sources/ "${DEST}"'
                 }
                
             }
