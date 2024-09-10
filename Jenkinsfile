@@ -9,9 +9,9 @@ pipeline {
         }
         stage('Deploy') {
             steps{
-                withCredentials([string(credentialsId: 'DEST', variable: 'DEST')]){
+                // withCredentials([string(credentialsId: 'DEST', variable: 'DEST')]){
                     sh 'scp -r sources/ "${DEST}"'
-                }
+                // }
                
             }
         }
