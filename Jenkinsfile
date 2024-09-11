@@ -15,9 +15,11 @@ pipeline {
             // }
 
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'SANDBOX_DEPLOY', keyFileVariable: 'SSH_KEY_FILE', usernameVariable: 'SSH_USER')]) {
-                    // Switch to your user and execute the scp command
-                    sh 'scp -i $SSH_KEY_FILE  -r sources/ root@95.216.167.245:/root/jenkins'
+                withCredentials([
+                        sshUserPrivateKey(credentialsId: 'SANDBOX_DEPLOY', keyFileVariable: 'SSH_KEY_FILE', usernameVariable: 'SSH_USER'),
+                        string(credentialsId: 'DEST', variable:'DEST')
+                    ]) {
+                    sh 'scp -i $SSH_KEY_FILE  -r sources/ "$DEST"'
                 }
             }
         }
